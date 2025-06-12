@@ -85,31 +85,67 @@ This engine mimics **price-time priority** order matching—core to REG NMS regu
 Install the project dependencies<code><pre>pip install fastapi uvicorn websockets pydantic</code> </pre>
 
 ### Run the App
-<code><pre>uvicorn main:app --reload</code> </pre>
+<code><pre>uvicorn main:app --reload</pre></code> 
 
 ### Access Swagger UI
-Visit: http://localhost:8000/docs
-
-## 📡 WebSocket Endpoints
-<strong>Endpoint&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Description</strong><br>
-/ws/trades&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Live trade feed (send JSON objects)<br>
-/ws/orderbook&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	Live order book snapshot<br>
+Visit: http://localhost:8000/docs<br><br>
+<img src="Swagger%20UI.png" alt="Swagger UI" width="900" height="400">
 
 ## 📊 API Usage
+
+Click on the dropdown on Post /submit_order. Then click on try it out.<br><br>
+<img src="Post%20Submit%20Order%20(A).png" alt="Post Submit Order (A).png" width="900" height="400"><br><br>
+
+Then edit the request body using any submit order. One submit order is given below for reference.<br><br>
 ### 📤 Submit Order (POST /submit_order)
 <code><pre>
 {
   "symbol": "BTC-USDT",
   "order_type": "limit",
-  "side": "buy",
+  "side": "sell",
   "price": 26000,
-  "quantity": 1.0
+  "quantity": 2.0
 }
 </pre></code>
-### 📥 Get BBO Snapshot (GET /order_book/BTC-USDT)
-Returns best bid & ask for the pair.
+
+### Sell order <br>
+JSON for sell order<br><br>
+<img src="Post%20Submit%20Order%20(B).png" alt="Post Submit Order (B).png" width="900" height="400"><br><br>
+
+### Response for sell order<br>
+Response for sell order<br><br>
+<img src="Post%20Submit%20Order%20(B)%20Response.png" alt="Post Submit Order (B) Response.png" width="900" height="400"><br><br>
+
+### Buy order <br>
+JSON for buy order<br><br>
+<img src="Post%20Submit%20Order%20(C).png" alt="Post Submit Order (C).png" width="900" height="400"><br><br>
+
+### Response for buy order<br>
+Response for buy order<br><br>
+<img src="Post%20Submit%20Order%20(C)%20Response.png" alt="Post Submit Order (C) Response.png" width="900" height="400"><br><br>  
+
+## 📥 Get BBO Snapshot (GET /order_book/BTC-USDT)
+
+### Get order /order_book <br>
+Checking for symbol BTC-USDT<br><br>
+<img src="Get%20Order%20Book.png" alt="Get Order.png" width="900" height="400"><br><br>  
+
+### Response for Get order <br>
+Gives best bid and best ask <br><br>
+<img src="Get%20Order%20Book%20Response.png" alt="Get Order Response.png" width="900" height="400"><br><br>  
+
+
+## 📡 WebSocket Endpoints
+
+### 1.&nbsp;&nbsp;/ws/trades<br>
+Live trade feed (send JSON objects)
+<code><pre>ws://127.0.0.1:8000/ws/trades</pre></code>
+### 2.&nbsp;&nbsp;/ws/orderbook<br>
+Live order book snapshot
+<code><pre>ws://127.0.0.1:8000/ws/orderbook</pre></code><br>
+### Live Trade Feed
+<img src="Live%20Trading.png" alt="Live Trade" width="900" height="400"><br><br>  
 
 ## 🗃️ Inspecting the Database
 Run this to check if orders/trades are being persisted:
-
 <code><pre>python database.py</pre></code>
